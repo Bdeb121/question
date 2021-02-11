@@ -1,1539 +1,1690 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* variable */
-        :root {
-            --bg-P: #0984e3; 
-            --bg-S: #b9ddff; 
-
-            --bg-R: #00b894;
-            --bg-W: #e74c3c;
-
-            --bg-r: #b5f7e9;
-            --bg-rr: #95f1dd;
-            --bg-w: #fccac5;
-            --bg-ww: #f79d9a;
-
-            --bg-lr: #f3c2c2; 
-            --bg-lg: #cff5d7; 
-
-            --bg-0: #f8f9fc;
-            --bg-1: #f5f6fc;
-            --bg-2: #eaecf4;
-            --bg-3: #dddfeb;
-            --bg-4: #b7b9cc;
-
-            --bg-5: #858796;
-            --bg-6: #6e707e;
-            --bg-7: #5a5c69;
-            --bg-8: #3a3b45;
-            --bg-9: #090909;
-
-            --bg-l1: #d2e9fe;
-            --bg-l11: #d7ecff;
-            --bg-l2: #1f8ffb;
-            /* --bg-l22: #0077ff; #f7f0f4 */
-            --bg-l3: #FFF2F2; /* red light*/
-            --bg-l33: #dbedff; /* #e8f4ff #dfefff*/
-            --bg-l4: #EBFEEF; /* green light*/
-            --bg-l5: #ECEBFE; /* violet light Nunito, "Helvetica Neue", Helvetica, sans-serif;*/
-            --bg-l55: #ca9ff3;
-            --bg-l6: #E1F4D3;
-
-            --bg-l7: #202026;
-            --bg-l8: #FBEAE5;
-            --bg-l9: #282C34;
-            --bg-l99: #99997F;
-            --bg-l:#EDF5FF; /* violet*/ 
-
-        }
-        
-        /* All selector */
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            outline: none;
-            user-select: none;
-        }
-        /* body */
-        body{
-            background: var(--bg-P);
-            font-family: 'Karla', sans-serif;
-            font-style: normal;
-            font-size: 16px;
-            font-weight: 500;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%);
-            z-index: -1;
-        }
-        .btn{
-            padding: 10px 20px;
-            background-color: var(--bg-P);
-            border: none;
-            outline: none;
-            color: var(--bg-0);
-            border-radius: 8px;
-            font-family: 'Karla', sans-serif;
-            font-size: 18px;
-            font-weight: 500;
-            /* cursor: pointer; */
-        }
-
-        .btn:hover{
-            box-shadow: 0 0 0 5px var(--bg-S);
-        }
-
-
-        /* Quiz Box */
-        .quiz-box{
-            margin: 30px auto;
-            max-width: 1000px;
-            height: calc(100vh - 60px);
-            padding: 30px;
-            background: var(--bg-0);
-            border-radius: 20px;
-            display: flex;
-            justify-content: start;
-            flex-direction: column;
-            /* display: none; */
-        }
-
-        .quiz-box.inactive{
-            display: none;
-        }
-
-        /* Quiz Box > Quiz Header */
-        .quiz-box .quiz-header{
-            background: var(--bg-P);
-            color: var(--bg-0);
-            height: 48px;
-            border-radius: 12px 12px 0 0;
-            display: flex;
-            justify-content: space-between;
-        }
-        .quiz-header .quiz-title,
-        .quiz-header .quiz-menu{
-            font-size: 20px;
-            font-weight: 500;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px;
-        }
-        .quiz-header .quiz-menu{
-            opacity: 0;
-            /* line-height: 28px;
-            font-weight: 900;
-            font-size: 20px;
-            padding: 0; */
-        }
-        .quiz-header .quiz-menu svg{
-            height: 18px;
-            width: 18px;
-        }
-
-
-        /* Quiz Box > Quiz Body */
-        .quiz-box .quiz-body{
-            display: flex;
-            /* justify-content: space-evenly; */
-            /* align-items: start; */
-            border-top: 1px solid var(--bg-7);
-            /* border-bottom: 1px solid var(--bg-7); */
-            margin-top: 6px;
-        }
-
-
-        /* Quiz Box > Quiz Body > Question Box */
-        .quiz-body .question-box{
-            width: 70%;
-            height: calc(100vh - 175px);
-            display: flex;
-            flex-direction: column;
-            /* padding-bottom: 10px; */
-            padding-right: 20px;
-        }
-        .question-box .question-header{
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--bg-7);
-            height: 48px;
-            padding: 10px 0px;
-        }
-        .question-header .question-number{
-            margin: 0px 10px;
-            padding: 0px 10px;
-            border: 1px solid var(--bg-9);
-            /* border: 1px solid var(--bg-l2); */
-            /* background: var(--bg-l); */
-            /* background: var(--bg-l); */
-            font-size: 18px;
-            line-height: 23px;
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* .question-number .question-alpha{
-            height: 20px;
-            width: 20px;
-            background: var(--bg-l2);
-        } */
-        
-        .question-header .quiz-timer{
-            font-size: 18px;
-            /* line-height: 26px; */
-            padding: 0 6px;
-            border-radius: 8px;
-            background: var(--bg-P);
-            color: var(--bg-0);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-
-        /* Quiz Box > Quiz Body > Question Box > Question Text*/
-        .question-box .question-text{
-            font-size: 20px;
-            font-weight: 500;
-            line-height: 26px;
-            padding: 24px 10px;
-            /* padding-right: 20px; */
-            text-transform: capitalize;
-        }
-
-
-        /* Quiz Box > Quiz Body > Question Box > Question Option*/
-        .question-box .question-option{
-            margin: 0 10px;
-            padding-right: 20px;
-            overflow: hidden;
-            overflow-y: auto;
-        } 
-        .question-option::-webkit-scrollbar {
-            width: 8px;
-        }
-        .question-option::-webkit-scrollbar-track {
-            background: var(--bg-S);
-            border-radius: 4px;
-        }
-        .question-option::-webkit-scrollbar-thumb {
-            background-color: var(--bg-P) ;
-            border-radius: 4px;
-            border: 2px solid var(--bg-S);
-        }
-        .question-option .option{
-            padding: 15px 15px;
-            margin-bottom: 16px;
-            font-size: 18px;
-            border: 2px solid var(--bg-l2);
-            background: var(--bg-l1);
-            border-radius: 12px;
-            /* cursor: pointer; */
-            display: flex;
-            /* justify-content: start; */
-            align-items: center;
-        }
-
-        .option .option-alpha{
-            height: 20px;
-            width: 20px;
-            margin-right: 10px;
-            font-size: 16px;
-            /* line-height: 25px; */
-            /* font-weight: 600; */
-            background: var(--bg-P);
-            color: var(--bg-0);
-            border-radius: 50%;
-            /* cursor: auto; */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .question-option .option.right,
-        .question-option .option.wrong{
-            /* color: var(--bg-0); */
-            border-radius: 12px;
-            /* animation: anim .4s ease-in-out forwards; */
-        }
-        .question-option .option.right{
-            background: var(--bg-r);
-            border: 2px solid var(--bg-R);
-        }
-        .question-option .option.wrong {
-            background: var(--bg-w);
-            border: 2px solid var(--bg-W);
-        }
-
-        /* .option .option-alpha.right,
-        .option .option-alpha.wrong {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        } */
-
-        .option .option-alpha.right{
-            background: var(--bg-R);
-        }
-        .option .option-alpha.wrong{
-            background: var(--bg-W);
-        }
-        /* @keyframes anim{
-            0% { transform: translateX(-100%);}
-            100% { transform: translateX(0);}
-        } */
-
-        .question-option .option.answered {
-            pointer-events: none;
-        }
-
-        .question-box .question-direction{
-            width: 100%;
-            margin-top: auto;
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 5px 10px;
-            border-bottom: 1px solid var(--bg-7);
-        }
-
-
-        /* Quiz Box > Quiz Body > Option Box */
-        .quiz-body .answer-box{
-            width: 30%;
-            border-left: 1px solid var(--bg-7);
-            height: calc(100vh - 175px);
-            display: flex;
-            flex-direction: column;
-            padding-left: 20px;
-            /* padding-bottom: 10px; */
-        }
-
-        .answer-box .answer-header{
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--bg-7);
-            padding: 10px 0;
-        }
-
-        .answer-header .answer-text,
-        .answer-header .answer-close{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            line-height: 26px;
-            font-size: 20px;
-        }
-
-        .answer-header .answer-close{
-            /* margin: auto 0; */
-            opacity: 0;
-            /* line-height: 26px;
-            font-weight: 900;
-            font-size: 14px;
-            padding: 0; */
-        }
-
-        .answer-header .answer-close svg{
-            height: 18px;
-            width: 18px;
-        }
-
-        /* .answer-close .fa-times:before {
-            content: "\f00d"
-        } */
-
-        .answer-box .answer-instruction {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px 0;
-            /* padding-right: 10px; */
-        }
-
-        .answer-box .correct-box,
-        .answer-box .unmarked-box,
-        .answer-box .incorrect-box {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin: 2px 0;
-        }
-
-        .answer-box .correct-box div,
-        .answer-box .unmarked-box div,
-        .answer-box .incorrect-box div {
-            height: 30px;
-            width: 30px;
-            border-radius: 50%; 
-        }
-        .answer-box .correct-box span,
-        .answer-box .unmarked-box span,
-        .answer-box .incorrect-box span {
-            font-size: 15px;
-            line-height: 26px;
-        }
-        .answer-box .correct-box div{
-            background: var(--bg-lg);
-            border: 2px solid var(--bg-R);  
-        }
-        .answer-box .unmarked-box div {
-            background: var(--bg-l11);
-            border: 2px solid var(--bg-l2);  
-        }
-
-        .answer-box .incorrect-box div {
-            background: var(--bg-lr);
-            border: 2px solid var(--bg-W);  
-        }
-
-        .answer-box .answer-container {
-            padding: 10px;
-            /* padding-right: 16px; */
-            overflow: hidden;
-            overflow-y: auto;
-            scroll-behavior: smooth;
-        }
-
-        .answer-container::-webkit-scrollbar {
-            width: 8px;
-        }
-        .answer-container::-webkit-scrollbar-track {
-            background: var(--bg-S);
-            border-radius: 4px;
-        }
-        .answer-container::-webkit-scrollbar-thumb {
-            background-color: var(--bg-P) ;
-            border-radius: 4px;
-            border: 2px solid var(--bg-S);
-        }
-        
-        .answer-box .answer-indicator {
-            width: 100%;
-            display: grid;
-            grid-template: '1fr 1fr 1fr 1fr';
-            grid-gap: 20px;
-            place-items: center;
-        }
-        .answer-box .answer-indicator div {
-            width: 36px;
-            height: 36px;
-            /* background-color: var(--bg-0); */
-            background-color: var(--bg-l11);
-            /* border: 1px solid var(--bg-5); */
-            border: 2px solid var(--bg-l2);
-            color: var(--bg-9);
-            border-radius: 50%;
-            font-size: 18px;
-            font-weight: 500;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* cursor: pointer; */
-        }
-
-        .answer-indicator div.right{
-            background: var(--bg-lg);
-            border: 2px solid var(--bg-R);
-        }
-
-        .answer-indicator div.wrong{
-            background: var(--bg-lr);
-            border: 2px solid var(--bg-W);
-        }
-
-        .answer-box .answer-submit{
-            margin-top: auto;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding: 20px 5px 10px;
-            border-bottom: 1px solid var(--bg-7);
-        }
-
-        .answer-box .answer-submit .submit{
-            width: 100%;
-        }
-
-
-
-        /* Result box */
-        .result-box{
-            max-width: 640px;
-            height: calc(100vh - 140px);
-            padding: 30px;
-            margin: 70px auto;
-            background: var(--bg-0);
-            border-radius: 20px;
-            display: flex;
-            justify-content: start;
-            flex-direction: column;
-            transition: all .8s ease-in-out;
-            display: none;
-            /* clip-path: circle(0% at 50% 50%); */
-        }
-
-        .result-box.active{
-            display: flex;
-            /* clip-path: circle(0% at 50% 50%); */
-        }
-
-        .result-box.anim{
-            clip-path: circle(100%);
-        }
-
-        .result-box .result-header {
-            align-self: center;
-            /* text-align: center; */
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--bg-9);
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--bg-7);
-        }
-
-        .result-box .result-body{
-            /* align-content: center; */
-            margin: auto 0;
-        }
-
-        .result-body table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
-        }
-
-        .result-body table td {
-            border: 1px solid var(--bg-5);
-            padding: 10px 15px;
-            font-weight: 500;
-            color: var(--bg-8);
-            width: 70%;
-            text-align: left;
-            font-size: 18px;
-        }
-
-        .result-box .result-footer {
-            margin-top: auto;
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 5px;
-            border-bottom: 1px solid var(--bg-7);
-        }
-
-
-        /* Review Box*/
-        .review-box{
-            margin: 30px auto;
-            max-width: 640px;
-            height: calc(100vh - 60px);
-            padding: 20px;
-            background: #fff;
-            border-radius: 16px;
-            /* display: flex; */
-            flex-direction: column;
-            display: none;
-        }
-
-        .review-box.active{
-            display: flex;
-        }
-
-        .review-box .review-body{
-            /* padding: 10px 0; */
-            height: calc(100vh - 140px);
-            /* border: 2px solid var(--bg-P);
-            background: var(--bg-l1);
-            border-radius: 16px; */
-            overflow: hidden;
-            overflow-y: auto;
-            /* padding: 0 10px; */
-        }
-
-        .review-body::-webkit-scrollbar {
-            display: none;
-        }
-        
-
-        .review-body .question-card{
-            border: 1px solid var(--bg-7);
-            border-bottom: none;
-            /* border-bottom: 1px solid var(--bg-7); */
-            background: var(--bg-l22);
-            /* border-radius: 16px; */
-            padding: 10px;
-            /* margin-bottom: 10px; */
-            display: flex;
-            justify-content: start;
-            flex-direction: column;
-        }
-
-        .review-body .question-card:first-child{
-            border-top: 1px solid var(--bg-7);
-            border-radius: 12px 12px 0 0;
-        }
-
-        .review-body .question-card:last-child{
-            border-bottom: 1px solid var(--bg-7);
-            border-radius: 0 0 12px 12px;
-        }
-
-        .question-card .review-ques{
-            font-size: 18px;
-            padding: 6px 0 12px;
-        }
-
-        .question-card span {
-            margin-left: 0px;
-            padding: 1px 4px;
-            background: var(--bg-l55);
-            /* color: var(--bg-0); */
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            /* text-decoration: underline; */
-        }
-
-        .review-ques b {
-           text-decoration: underline;
-        }
-
-        .question-card .review-ans{
-            font-size: 16px;
-            margin-left: 20px;
-            display: flex;
-            justify-content: start;
-            align-items: flex-start;
-            flex-direction: column;
-        }
-
-        .review-ans .user-ans{
-            margin-bottom: 10px;
-            /* background: var(--bg-lr); */
-            background: var(--bg-ww);
-            /* border: 1px solid var(--bg-W); */
-            border-radius: 8px;
-            padding: 2px 8px;
-        }
-
-        .review-ans .right-ans{
-            /* margin-top: 10px; */
-            margin-bottom: 10px;
-            /* background: var(--bg-lg); */
-            background: var(--bg-rr);
-            /* border: 1px solid var(--bg-R); */
-            border-radius: 8px;
-            padding: 2px 8px;
-        }
-
-        .review-box .review-footer {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 5px 5px;
-        }
-
-
-        @media (max-width: 1060px) {
-            .quiz-box{
-                margin: 30px;
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+        <style>
+            /* variable */
+            :root {
+                --bg-P: #0984e3;
+                --bg-S: #b9ddff;
+
+                --bg-R: #00b894;
+                --bg-W: #e74c3c;
+
+                --bg-r: #b5f7e9;
+                --bg-rr: #95f1dd;
+                --bg-w: #fccac5;
+                --bg-ww: #f79d9a;
+
+                --bg-v: #b8b5f7;
+
+                --bg-lr: #f3c2c2;
+                --bg-lg: #cff5d7;
+
+                --bg-0: #f8f9fc;
+                --bg-1: #f5f6fc;
+                --bg-2: #eaecf4;
+                --bg-3: #dddfeb;
+                --bg-4: #b7b9cc;
+
+                --bg-5: #858796;
+                --bg-6: #6e707e;
+                --bg-7: #5a5c69;
+                --bg-8: #3a3b45;
+                --bg-9: #090909;
+
+                --bg-l1: #d2e9fe;
+                --bg-l11: #d7ecff;
+                --bg-l2: #1f8ffb;
+                /* --bg-l22: #0077ff; #f7f0f4 */
+                --bg-l3: #fff2f2; /* red light*/
+                --bg-l33: #dbedff; /* #e8f4ff #dfefff*/
+                --bg-l4: #ebfeef; /* green light*/
+                --bg-l5: #ecebfe; /* violet light Nunito, "Helvetica Neue", Helvetica, sans-serif;*/
+                --bg-l55: #ca9ff3;
+                --bg-l6: #e1f4d3;
+
+                --bg-l7: #202026;
+                --bg-l8: #fbeae5;
+                --bg-l9: #282c34;
+                --bg-l99: #99997f;
+                --bg-l: #edf5ff; /* violet */
             }
-        }
-
-        @media (max-width: 970px) {
-            .answer-box .answer-indicator {
-                grid-gap: 16px;
-            }
-        }
-
-        @media (max-width: 900px){
-            /* .quiz-box{
-                transition: all .6s ease-in-out;
-            } */
-
-            .quiz-box{
-                margin: 20px;
-                padding: 20px;
-                height: calc(100vh - 40px);
-                border-radius: 18px;
-            }
-
-            .quiz-header .quiz-menu{
-               opacity: 1;
-               /* cursor: pointer; */
-               background: var(--bg-0);
-               color: var(--bg-P);
-               height: 28px;
-               width: 28px;
-               border-radius: 50%;
-               /* margin: 10px; */
-            }
-            .quiz-body .question-box{
-                width: 100%;
-                height: calc(100vh - 135px);
+            /* All selector */
+            * {
+                margin: 0;
                 padding: 0;
+                box-sizing: border-box;
+                outline: none;
+                user-select: none;
             }
-
-            .question-header .quiz-timer{
-                margin: 0px 10px;
-            }
-
-            .quiz-body .answer-box{
-                position: absolute;
-                top: 0;
-                /* right: 30px; */
-                margin: 20px 0;
-                border-radius: 16px;
-                /* left: -300px; */
-                left: calc(100vw - 340px);
-                width: 320px;
-                height: calc(100vh - 40px);
-                padding: 20px;
-                border-left: none;
-                display: flex;
-                flex-direction: column;
-                background: var(--bg-0);
-                z-index: 999;
-                box-shadow: -4px 0 4px 0 rgba(0, 0, 0, 0.5);
-                transition: all .6s ease-in-out;
-                clip-path: circle(0% at 88% 5%);
-            }
-
-            .quiz-body .answer-box.active{
-                left: calc(100vw - 340px);
-                clip-path: circle(100%);
-            }
-
-            .answer-box .answer-header{
-                padding: 10px 0 16px;
-            }
-
-            .answer-header .answer-text{
-                font-size: 20px;
-            }
-
-            .answer-header .answer-close{
-                opacity: 1;
-                /* cursor: pointer; */
-                width: 28px;
-                height: 28px;
-                margin: 0px 10px;
-                border-radius: 50%;
+            /* body */
+            body {
                 background: var(--bg-P);
+                font-family: 'Karla', sans-serif;
+                font-style: normal;
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+
+            .btn {
+                padding: 10px 20px;
+                background-color: var(--bg-P);
+                border: none;
+                outline: none;
                 color: var(--bg-0);
+                border-radius: 8px;
+                font-family: 'Karla', sans-serif;
+                font-size: 18px;
+                font-weight: 500;
+                /* cursor: pointer; */
             }
 
-            .answer-box .answer-instruction {
-                padding: 0px 10px;
+            .btn:hover {
+                box-shadow: 0 0 0 5px var(--bg-S);
             }
 
-            .answer-box .answer-container {
-                padding: 16px 16px;
+            .start-box {
+                max-width: 640px;
+                padding: 30px;
+                margin: 30px auto;
+                background: var(--bg-0);
+                border-radius: 20px;
+                display: flex;
+                justify-content: start;
+                flex-direction: column;
+                transition: all 0.8s ease-in-out;
             }
 
-            .answer-box .answer-indicator {
-                grid-template: '1fr 1fr 1fr 1fr';
-                grid-gap: 24px;
-            }
-            .answer-box .answer-indicator div {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-
-            .answer-box .answer-submit{
-                /* border-bottom: none; */
-            }
-
-            .overlay{
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100vh;
-                width: 100vw;
-                background: rgba(0, 0, 0, .3);
-                /* transition: all .6s ease-in-out; */
-                /* clip-path: circle(0% at 93% 8%); */
+            .start-box.inactive {
                 display: none;
             }
 
-            .overlay.active{
-                /* clip-path: circle(100%); */
-                display: block;
-            }
-        }
-
-        @media(max-width: 700px){
-            .result-box{
-                margin: 70px 20px;
-                padding: 20px;
-                height: calc(100vh - 140px);
-            }
-            .review-box{
-                margin: 20px;
-                padding: 20px;
-                height: calc(100vh - 40px);
-                border-radius: 18px;
+            .start-box .start-body {
+                display: flex;
+                justify-content: space-between;
             }
 
-            .review-box .review-body{
-                height: calc(100vh - 80px);
-            }
-        }
-
-        @media (max-width: 600px){
-            /* body::before{
-                clip-path: circle(30% at 0% 0%);
-            } */
-
-            .btn{
-                padding: 8px 16px;
-                font-size: 16px;
-                line-height: 20px;
+            .start-body .start-body-left {
+                width: 50%;
+                display: flex;
+                justify-content: start;
+                flex-direction: column;
+                border-right: 2px solid var(--bg-7);
             }
 
-            .btn:hover{
-                box-shadow: 0 0 0 3px var(--bg-S);
+            .start-body .start-body-right {
+                width: 50%;
+                display: flex;
+                justify-content: start;
+                flex-direction: column;
+                /* border-left: 2px solid var(--bg-7); */
+                padding-left: 20px;
             }
 
-            .quiz-box{
-                margin: 10px;
-                padding: 20px;
-                height: calc(100vh - 20px);
-                border-radius: 16px;
+            .start-body-left .heading,
+            .start-body-right .heading {
+                font-size: 24px;
+                font-weight: 600;
+                text-decoration: underline;
             }
 
-            .quiz-box .quiz-header{
-                height: 36px;
-                /* border-radius: 12px 12px 0 0; */
+            .start-body-left .total-question {
+                margin: 10px 0;
+                font-size: 20px;
             }
 
+            .start-body-left .number {
+                display: flex;
+                justify-content: start;
+                flex-direction: column;
+                font-size: 18px;
+            }
+
+            .start-body-left .number span {
+                margin-bottom: 6px;
+            }
+
+            .start-body-right .chapter {
+                font-size: 20px;
+                margin: 10px 0;
+            }
+
+            .start-body-right .topics {
+                /* display: inline-block; */
+                /* display: grid;
+                grid-auto-flow: dense;
+                grid-template:  "1fr 1fr 1fr" 20px
+                                "1fr 1fr 1fr" 20px;
+                grid-gap: 10px; 
+                place-items: center; */
+                display: flex;
+                /* justify-content: start; */
+                flex-wrap: wrap;
+            }
+
+            .start-body-right .topics span {
+                padding: 2px 4px;
+                /* background: var(--bg-ww); */
+                border-radius: 6px;
+                margin-top: 6px;
+                margin-right: 6px;
+                /* margin: 6px; */
+            }
+
+            .topics span:nth-child(3n + 1) {
+                background: var(--bg-rr);
+            }
+
+            .topics span:nth-child(3n + 2) {
+                background: var(--bg-v);
+            }
+
+            .topics span:nth-child(3n) {
+                background: var(--bg-ww);
+            }
+
+            .start-box .start-footer {
+                margin: 20px 0 0;
+            }
+
+            .start-footer .start {
+                float: right;
+            }
+
+            /* Quiz Box */
+            .quiz-box {
+                margin: 30px auto;
+                max-width: 1000px;
+                height: calc(100vh - 60px);
+                padding: 30px;
+                background: var(--bg-0);
+                border-radius: 20px;
+                /* display: flex; */
+                justify-content: start;
+                flex-direction: column;
+                display: none;
+                transition: all 0.8s ease-in-out;
+            }
+
+            .quiz-box.active {
+                display: flex;
+            }
+
+            /* Quiz Box > Quiz Header */
+            .quiz-box .quiz-header {
+                background: var(--bg-P);
+                color: var(--bg-0);
+                height: 48px;
+                border-radius: 12px 12px 0 0;
+                display: flex;
+                justify-content: space-between;
+            }
             .quiz-header .quiz-title,
-            .quiz-header .quiz-menu{
+            .quiz-header .quiz-menu {
+                font-size: 20px;
+                font-weight: 500;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 10px;
+            }
+            .quiz-header .quiz-menu {
+                opacity: 0;
+                /* line-height: 28px;
+              font-weight: 900;
+              font-size: 20px;
+              padding: 0; */
+            }
+            .quiz-header .quiz-menu svg {
+                height: 18px;
+                width: 18px;
+            }
+
+            /* Quiz Box > Quiz Body */
+            .quiz-box .quiz-body {
+                display: flex;
+                /* justify-content: space-evenly; */
+                /* align-items: start; */
+                border-top: 1px solid var(--bg-7);
+                /* border-bottom: 1px solid var(--bg-7); */
+                margin-top: 6px;
+            }
+
+            /* Quiz Box > Quiz Body > Question Box */
+            .quiz-body .question-box {
+                width: 70%;
+                height: calc(100vh - 175px);
+                display: flex;
+                flex-direction: column;
+                /* padding-bottom: 10px; */
+                padding-right: 20px;
+            }
+            .question-box .question-header {
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid var(--bg-7);
+                height: 48px;
+                padding: 10px 0px;
+            }
+            .question-header .question-number {
+                margin: 0px 10px;
+                padding: 0px 10px;
+                border: 1px solid var(--bg-9);
+                /* border: 1px solid var(--bg-l2); */
+                /* background: var(--bg-l); */
+                /* background: var(--bg-l); */
                 font-size: 18px;
-                line-height: 20px;
-                margin: 6px;
-            }
-
-            /* .quiz-header .quiz-title{
-                margin-left: 10px;
-            } */
-
-            .quiz-header .quiz-menu{
-               height: 24px;
-               width: 24px;
-               cursor: none;
-            }
-
-            .quiz-header .quiz-menu svg{
-                height: 16px;
-                width: 16px;
-            }
-
-            .quiz-body .question-box{
-                height: calc(100vh - 103px);
-            }
-
-            .question-box .question-header{
-                height: 36px;
-                padding: 6px 0px;
-            }
-            .question-header .question-number{
-                margin: 0px;
-                padding: 0px 6px;
-                font-size: 16px;
-                line-height: 21px;
-            }
-            
-            .question-header .quiz-timer{
-                font-size: 16px;
                 line-height: 23px;
-                padding: 0 6px;
-                margin: 0px;
+                border-radius: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
-            .question-box .question-text{
+            /* .question-number .question-alpha{
+              height: 20px;
+              width: 20px;
+              background: var(--bg-l2);
+          } */
+
+            .question-header .quiz-timer {
                 font-size: 18px;
-                line-height: 24px;
-                padding: 20px 0px;
-                /* padding-right: 16px; */
+                /* line-height: 26px; */
+                padding: 0 6px;
+                border-radius: 8px;
+                background: var(--bg-P);
+                color: var(--bg-0);
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
-            .question-box .question-option{
+            /* Quiz Box > Quiz Body > Question Box > Question Text*/
+            .question-box .question-text {
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 26px;
+                padding: 24px 10px;
+                /* padding-right: 20px; */
+                text-transform: capitalize;
+            }
+
+            /* Quiz Box > Quiz Body > Question Box > Question Option*/
+            .question-box .question-option {
                 margin: 0 10px;
                 padding-right: 20px;
-            } 
-
-            .question-option .option{
-                padding: 8px 12px;
-                margin-bottom: 10px;
-                font-size: 16px;
-                line-height: 24px;
+                overflow: hidden;
+                overflow-y: auto;
+            }
+            .question-option::-webkit-scrollbar {
+                width: 8px;
+            }
+            .question-option::-webkit-scrollbar-track {
+                background: var(--bg-S);
+                border-radius: 4px;
+            }
+            .question-option::-webkit-scrollbar-thumb {
+                background-color: var(--bg-P);
+                border-radius: 4px;
+                border: 2px solid var(--bg-S);
+            }
+            .question-option .option {
+                padding: 15px 15px;
+                margin-bottom: 16px;
+                font-size: 18px;
+                border: 1px solid var(--bg-l2);
+                background: var(--bg-l1);
                 border-radius: 12px;
-                /* text-transform: lowercase; */
+                /* cursor: pointer; */
+                /* display: flex; */
+                /* justify-content: start;
+                align-items: center; */
+                display: table;
+                width: 100%;
+                vertical-align: middle;
+                /* text-align: left; */
+                /* line-height: 18; */
+                text-transform: capitalize;
+                transition: all .2s ease-in-out;
             }
 
-            .question-box .question-direction{
-                padding: 20px 4px 10px;
+            .option .option-alpha {
+                /* display: table-cell; */
+                height: 20px;
+                width: 20px;
+                margin: auto 0;
+                margin-right: 10px;
+                font-size: 15px;
+                /* line-height: 25px; */
+                /* font-weight: 600; */
+                background: var(--bg-P);
+                color: var(--bg-0);
+                border-radius: 50%;
+                /* padding-top: -1px; */
+                /* align-self: baseline; */
+                /* cursor: auto; */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /* text-align: center; */
+            }
+
+            .option .option-text{
+                width: 100%;
+                display: table-cell;
+                /* display: flex; */
+                text-align: left;
+                /* flex-grow: 1; */
+                /* text-indent: 10px; */
+                /* text-align: justify; */
+            }
+
+            .question-option .option.right,
+            .question-option .option.wrong {
+                /* color: var(--bg-0); */
+                border-radius: 12px;
+                /* font-weight: 600; */
+                /* color: var(--bg-8); */
+                /* border: 1px solid var(--bg-8); */
+                /* animation: anim .4s ease-in-out forwards; */
+            }
+            .question-option .option.right {
+                background: var(--bg-r);
+                border: 1px solid var(--bg-R);
+                /* color: var(--bg-R); */
+                /* font-weight: 600; */
+            }
+            .question-option .option.wrong {
+                background: var(--bg-w);
+                border: 1px solid var(--bg-W);
+                /* color: var(--bg-W); */
+                /* font-weight: 600; */
+            }
+
+            .option .option-alpha.right {
+                background: var(--bg-R);
+                font-weight: normal;
+            }
+            .option .option-alpha.wrong {
+                background: var(--bg-W);
+                font-weight: normal;
+            }
+            
+
+            .question-option .option.answered {
+                pointer-events: none;
+            }
+
+            .question-box .question-direction {
+                width: 100%;
+                margin-top: auto;
+                display: flex;
+                justify-content: space-between;
+                padding: 20px 5px 10px;
                 border-bottom: 1px solid var(--bg-7);
             }
 
-            .quiz-body .answer-box{
-                top: 0;
-                height: calc(100vh - 20px);
-                width: 300px;
-                margin: 10px 0;
-                padding: 20px;
-                border-bottom: none;
-                border-radius: 16px;
-                left: calc(100vw - 310px);
-                clip-path: circle(0% at 88% 5%);
-                transition: all .6s ease-in-out;
+            /* Quiz Box > Quiz Body > Option Box */
+            .quiz-body .answer-box {
+                width: 30%;
+                border-left: 1px solid var(--bg-7);
+                height: calc(100vh - 175px);
+                display: flex;
+                flex-direction: column;
+                padding-left: 20px;
+                /* padding-bottom: 10px; */
             }
 
-            .quiz-body .answer-box.active{
-                left: calc(100vw - 310px);
-                clip-path: circle(100%);
+            .answer-box .answer-header {
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid var(--bg-7);
+                padding: 10px 0;
             }
 
-            .answer-box .answer-header{
-                padding: 6px 0 10px;
+            .answer-header .answer-text,
+            .answer-header .answer-close {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                line-height: 26px;
+                font-size: 20px;
             }
 
-            .answer-header .answer-text{
-                /* margin-bottom: 2px; */
-            }
-            .answer-header .answer-close{
-                width: 24px;
-                height: 24px;
-                /* margin-bottom: 2px; */
-                line-height: 24px;
-                font-size: 16px;
-                cursor: none;
-                margin: 0px 6px;
+            .answer-header .answer-close {
+                /* margin: auto 0; */
+                opacity: 0;
+                /* line-height: 26px;
+                font-weight: 900;
+                font-size: 14px;
+                padding: 0; */
             }
 
-            .answer-header .answer-close svg{
-                height: 16px;
-                width: 16px;
+            .answer-header .answer-close svg {
+                height: 18px;
+                width: 18px;
             }
+
+            /* .answer-close .fa-times:before {
+              content: "\f00d"
+          } */
 
             .answer-box .answer-instruction {
-                padding: 0px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 20px 0;
+                /* padding-right: 10px; */
+            }
+
+            .answer-box .correct-box,
+            .answer-box .unmarked-box,
+            .answer-box .incorrect-box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                flex-wrap: wrap;
+                margin: 2px 0;
+            }
+
+            .answer-box .correct-box div,
+            .answer-box .unmarked-box div,
+            .answer-box .incorrect-box div {
+                height: 30px;
+                width: 30px;
+                border-radius: 50%;
+            }
+            .answer-box .correct-box span,
+            .answer-box .unmarked-box span,
+            .answer-box .incorrect-box span {
+                font-size: 15px;
+                line-height: 26px;
+            }
+            .answer-box .correct-box div {
+                background: var(--bg-lg);
+                border: 1px solid var(--bg-R);
+            }
+            .answer-box .unmarked-box div {
+                background: var(--bg-l11);
+                border: 1px solid var(--bg-l2);
+            }
+
+            .answer-box .incorrect-box div {
+                background: var(--bg-lr);
+                border: 1px solid var(--bg-W);
             }
 
             .answer-box .answer-container {
-                padding: 10px 10px;
+                padding: 10px;
+                /* padding-right: 16px; */
+                overflow: hidden;
+                overflow-y: auto;
+                scroll-behavior: smooth;
+            }
+
+            .answer-container::-webkit-scrollbar {
+                width: 8px;
+            }
+            .answer-container::-webkit-scrollbar-track {
+                background: var(--bg-S);
+                border-radius: 4px;
+            }
+            .answer-container::-webkit-scrollbar-thumb {
+                background-color: var(--bg-P);
+                border-radius: 4px;
+                border: 2px solid var(--bg-S);
             }
 
             .answer-box .answer-indicator {
+                width: 100%;
+                display: grid;
                 grid-template: '1fr 1fr 1fr 1fr';
-                grid-gap: 24px;
+                grid-gap: 20px;
+                place-items: center;
             }
             .answer-box .answer-indicator div {
                 width: 36px;
                 height: 36px;
-                font-size: 16px;
-                line-height: 24px;
+                /* background-color: var(--bg-0); */
+                background-color: var(--bg-l11);
+                /* border: 1px solid var(--bg-5); */
+                border: 1px solid var(--bg-l2);
+                /* padding-top: -1px; */
+                color: var(--bg-9);
+                border-radius: 50%;
+                font-size: 18px;
                 font-weight: 500;
+                /* padding-top: -1px; */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /* cursor: pointer; */
+                transition: all .2s ease-in-out;
             }
 
-            .answer-box .answer-submit{
-                padding: 20px 3px 10px;
+            .answer-indicator div.right {
+                background: var(--bg-lg);
+                border: 1px solid var(--bg-R);
+                /* color: var(--bg-R); */
+                /* font-weight: 600; */
+            }
+
+            .answer-indicator div.wrong {
+                background: var(--bg-lr);
+                border: 1px solid var(--bg-W);
+                /* color: var(--bg-W); */
+                /* font-weight: 600; */
+            }
+
+            .answer-box .answer-submit {
+                margin-top: auto;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                padding: 20px 5px 10px;
                 border-bottom: 1px solid var(--bg-7);
             }
 
-            /* .overlay{
-                clip-path: circle(1% at 89% 8%);
-            } */
-        }
-
-        @media(max-width: 500px){
-            .review-box{
-                margin: 10px;
-                padding: 16px;
-                height: calc(100vh - 20px);
-                border-radius: 18px;
+            .answer-box .answer-submit .submit {
+                width: 100%;
             }
 
-            .review-box .review-body{
-                height: calc(100vh - 52px);
-            }
-        }
-
-        @media (max-width: 400px) {
-            .quiz-box, .review-box{
-                margin: 8px;
-                padding: 16px;
-                height: calc(100vh - 16px);
-                border-radius: 12px;
-            }
-
-            .quiz-body .question-box{
-                height: calc(100vh - 91px);
-            }
-
-            .quiz-body .answer-box{
-                height: calc(100vh - 16px);
-                left: calc(100vw - 308px);
-                margin: 8px 0;
-                padding: 16px;
-                border-radius: 12px;
+            /* Result box */
+            .result-box {
+                max-width: 640px;
+                height: calc(100vh - 140px);
+                padding: 30px;
+                margin: 70px auto;
+                background: var(--bg-0);
+                border-radius: 20px;
+                display: flex;
+                justify-content: start;
+                flex-direction: column;
+                transition: all 0.8s ease-in-out;
+                display: none;
+                /* clip-path: circle(0% at 50% 50%); */
             }
 
-            .quiz-body .answer-box.active{
-                left: calc(100vw - 308px);
+            .result-box.active {
+                display: flex;
+                /* clip-path: circle(0% at 50% 50%); */
             }
 
-            .answer-box .answer-header{
-                padding: 6px 0 10px;
+            .result-box.anim {
+                clip-path: circle(100%);
             }
 
-            /* .overlay{
-                clip-path: circle(2% at 90% 7%);
-            } */
-        }
-    </style>
-</head>
-<body>
-    <!-- 2. Quiz Box -->
-    <div class="quiz-box">
-        <!-- 2.1 Quiz Header -->
-        <div class="quiz-header">
-            <div class="quiz-title">Leaving World Exercise 1</div>
-            <div class="quiz-menu"> 
-                <svg xmlns="http://www.w3.org/2000/svg" fill="var(--bg-P)" viewBox="0 0 448 512">
-                    <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/>
-                </svg>
+            .result-box .result-header {
+                align-self: center;
+                /* text-align: center; */
+                font-size: 24px;
+                font-weight: 600;
+                color: var(--bg-9);
+                padding-bottom: 10px;
+                border-bottom: 1px solid var(--bg-7);
+            }
+
+            .result-box .result-body {
+                /* align-content: center; */
+                margin: auto 0;
+            }
+
+            .result-body table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 30px 0;
+            }
+
+            .result-body table td {
+                border: 1px solid var(--bg-5);
+                padding: 10px 15px;
+                font-weight: 500;
+                color: var(--bg-8);
+                width: 70%;
+                text-align: left;
+                font-size: 18px;
+            }
+
+            .result-box .result-footer {
+                margin-top: auto;
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 5px;
+                border-bottom: 1px solid var(--bg-7);
+            }
+
+            /* Review Box*/
+            .review-box {
+                margin: 30px auto;
+                max-width: 640px;
+                height: calc(100vh - 60px);
+                padding: 20px;
+                background: #fff;
+                border-radius: 16px;
+                /* display: flex; */
+                flex-direction: column;
+                transition: all .8s ease-in-out forwards;
+                display: none;
+            }
+
+            .review-box.active {
+                display: flex;
+            }
+
+            .review-box .review-body {
+                /* padding: 10px 0; */
+                height: calc(100vh - 160px);
+                /* border: 2px solid var(--bg-P);
+              background: var(--bg-l1);
+              border-radius: 16px; */
+                overflow: hidden;
+                overflow-y: auto;
+                /* padding: 0 10px; */
+            }
+
+            .review-body::-webkit-scrollbar {
+                display: none;
+            }
+
+            .review-body .question-card {
+                border: 1px solid var(--bg-7);
+                border-bottom: none;
+                /* border-bottom: 1px solid var(--bg-7); */
+                background: var(--bg-l22);
+                /* border-radius: 16px; */
+                padding: 10px;
+                /* margin-bottom: 10px; */
+                display: flex;
+                justify-content: start;
+                flex-direction: column;
+            }
+
+            .review-body .question-card:first-child {
+                border-top: 1px solid var(--bg-7);
+                border-radius: 12px 12px 0 0;
+            }
+
+            .review-body .question-card:last-child {
+                border-bottom: 1px solid var(--bg-7);
+                border-radius: 0 0 12px 12px;
+            }
+
+            .question-card .review-ques {
+                font-size: 18px;
+                padding: 6px 0 12px;
+            }
+
+            .question-card span {
+                margin-left: 0px;
+                padding: 1px 4px;
+                /* background: var(--bg-l55); */
+                background: var(--bg-v);
+                /* color: var(--bg-0); */
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                /* text-decoration: underline; */
+            }
+
+            .review-ques b {
+                text-decoration: underline;
+            }
+
+            .question-card .review-ans {
+                font-size: 16px;
+                margin-left: 20px;
+                display: flex;
+                justify-content: start;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .review-ans .user-ans {
+                margin-bottom: 10px;
+                /* background: var(--bg-lr); */
+                background: var(--bg-ww);
+                /* border: 1px solid var(--bg-W); */
+                border-radius: 8px;
+                padding: 2px 8px;
+            }
+
+            .review-ans .right-ans {
+                /* margin-top: 10px; */
+                margin-bottom: 10px;
+                /* background: var(--bg-lg); */
+                background: var(--bg-rr);
+                /* border: 1px solid var(--bg-R); */
+                border-radius: 8px;
+                padding: 2px 8px;
+            }
+
+            .review-box .review-footer {
+                display: flex;
+                justify-content: space-between;
+                padding: 15px 5px 5px;
+            }
+
+            @media (max-width: 1060px) {
+                .quiz-box {
+                    margin: 30px;
+                }
+            }
+
+            @media (max-width: 970px) {
+                .answer-box .answer-indicator {
+                    grid-gap: 16px;
+                }
+            }
+
+            @media (max-width: 900px) {
+                /* .quiz-box{
+                  transition: all .6s ease-in-out;
+              } */
+
+                .quiz-box {
+                    margin: 20px;
+                    padding: 20px;
+                    height: calc(100vh - 40px);
+                    border-radius: 18px;
+                }
+
+                .quiz-header .quiz-menu {
+                    opacity: 1;
+                    /* cursor: pointer; */
+                    background: var(--bg-0);
+                    color: var(--bg-P);
+                    height: 28px;
+                    width: 28px;
+                    border-radius: 50%;
+                    /* margin: 10px; */
+                }
+                .quiz-body .question-box {
+                    width: 100%;
+                    height: calc(100vh - 135px);
+                    padding: 0;
+                }
+
+                .question-header .quiz-timer {
+                    margin: 0px 10px;
+                }
+
+                .quiz-body .answer-box {
+                    position: absolute;
+                    top: 0;
+                    /* right: 30px; */
+                    margin: 20px 0;
+                    border-radius: 16px;
+                    /* left: -300px; */
+                    left: calc(100vw - 340px);
+                    width: 320px;
+                    height: calc(100vh - 40px);
+                    padding: 20px;
+                    border-left: none;
+                    display: flex;
+                    flex-direction: column;
+                    background: var(--bg-0);
+                    z-index: 999;
+                    box-shadow: -4px 0 4px 0 rgba(0, 0, 0, 0.5);
+                    transition: all 0.6s ease-in-out;
+                    clip-path: circle(0% at 88% 5%);
+                }
+
+                .quiz-body .answer-box.active {
+                    left: calc(100vw - 340px);
+                    clip-path: circle(100%);
+                }
+
+                .answer-box .answer-header {
+                    padding: 10px 0 16px;
+                }
+
+                .answer-header .answer-text {
+                    font-size: 20px;
+                }
+
+                .answer-header .answer-close {
+                    opacity: 1;
+                    /* cursor: pointer; */
+                    width: 28px;
+                    height: 28px;
+                    margin: 0px 10px;
+                    border-radius: 50%;
+                    background: var(--bg-P);
+                    color: var(--bg-0);
+                }
+
+                .answer-box .answer-instruction {
+                    padding: 0px 10px;
+                }
+
+                .answer-box .answer-container {
+                    padding: 16px 16px;
+                }
+
+                .answer-box .answer-indicator {
+                    grid-template: '1fr 1fr 1fr 1fr';
+                    grid-gap: 24px;
+                }
+                .answer-box .answer-indicator div {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 20px;
+                }
+
+                .answer-box .answer-submit {
+                    /* border-bottom: none; */
+                }
+
+                .overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100vh;
+                    width: 100vw;
+                    background: rgba(0, 0, 0, 0.3);
+                    /* transition: all .6s ease-in-out; */
+                    /* clip-path: circle(0% at 93% 8%); */
+                    display: none;
+                }
+
+                .overlay.active {
+                    /* clip-path: circle(100%); */
+                    display: block;
+                }
+            }
+
+            @media (max-width: 700px) {
+                .start-box {
+                    padding: 20px;
+                    margin: 20px;
+                }
+                .result-box {
+                    margin: 70px 20px;
+                    padding: 20px;
+                    height: calc(100vh - 140px);
+                }
+                .review-box {
+                    margin: 20px;
+                    padding: 20px;
+                    height: calc(100vh - 40px);
+                    border-radius: 18px;
+                }
+
+                .review-box .review-body {
+                    height: calc(100vh - 80px);
+                }
+            }
+
+            @media (max-width: 600px) {
+                /* body::before{
+                  clip-path: circle(30% at 0% 0%);
+              } */
+
+                .btn {
+                    padding: 8px 16px;
+                    font-size: 16px;
+                    line-height: 20px;
+                }
+
+                .btn:hover {
+                    box-shadow: 0 0 0 3px var(--bg-S);
+                }
+
+                .quiz-box {
+                    margin: 10px;
+                    padding: 20px;
+                    height: calc(100vh - 20px);
+                    border-radius: 16px;
+                }
+
+                .quiz-box .quiz-header {
+                    height: 36px;
+                    /* border-radius: 12px 12px 0 0; */
+                }
+
+                .quiz-header .quiz-title,
+                .quiz-header .quiz-menu {
+                    font-size: 18px;
+                    line-height: 20px;
+                    margin: 6px;
+                }
+
+                /* .quiz-header .quiz-title{
+                  margin-left: 10px;
+              } */
+
+                .quiz-header .quiz-menu {
+                    height: 24px;
+                    width: 24px;
+                    cursor: none;
+                }
+
+                .quiz-header .quiz-menu svg {
+                    height: 16px;
+                    width: 16px;
+                }
+
+                .quiz-body .question-box {
+                    height: calc(100vh - 103px);
+                }
+
+                .question-box .question-header {
+                    height: 36px;
+                    padding: 6px 0px;
+                }
+                .question-header .question-number {
+                    margin: 0px;
+                    padding: 0px 6px;
+                    font-size: 16px;
+                    line-height: 21px;
+                }
+
+                .question-header .quiz-timer {
+                    font-size: 16px;
+                    line-height: 23px;
+                    padding: 0 6px;
+                    margin: 0px;
+                }
+
+                .question-box .question-text {
+                    font-size: 18px;
+                    line-height: 24px;
+                    padding: 20px 0px;
+                    /* padding-right: 16px; */
+                }
+
+                .question-box .question-option {
+                    margin: 0 10px;
+                    padding-right: 20px;
+                }
+
+                .question-option .option {
+                    padding: 8px 12px;
+                    margin-bottom: 10px;
+                    font-size: 16px;
+                    line-height: 24px;
+                    border-radius: 12px;
+                    /* text-transform: lowercase; */
+                }
+
+                .question-box .question-direction {
+                    padding: 20px 4px 10px;
+                    border-bottom: 1px solid var(--bg-7);
+                }
+
+                .quiz-body .answer-box {
+                    top: 0;
+                    height: calc(100vh - 20px);
+                    width: 300px;
+                    margin: 10px 0;
+                    padding: 20px;
+                    border-bottom: none;
+                    border-radius: 16px;
+                    left: calc(100vw - 310px);
+                    clip-path: circle(0% at 88% 5%);
+                    transition: all 0.6s ease-in-out;
+                }
+
+                .quiz-body .answer-box.active {
+                    left: calc(100vw - 310px);
+                    clip-path: circle(100%);
+                }
+
+                .answer-box .answer-header {
+                    padding: 6px 0 10px;
+                }
+
+                .answer-header .answer-text {
+                    /* margin-bottom: 2px; */
+                }
+                .answer-header .answer-close {
+                    width: 24px;
+                    height: 24px;
+                    /* margin-bottom: 2px; */
+                    line-height: 24px;
+                    font-size: 16px;
+                    cursor: none;
+                    margin: 0px 6px;
+                }
+
+                .answer-header .answer-close svg {
+                    height: 16px;
+                    width: 16px;
+                }
+
+                .answer-box .answer-instruction {
+                    padding: 0px;
+                }
+
+                .answer-box .answer-container {
+                    padding: 10px 10px;
+                }
+
+                .answer-box .answer-indicator {
+                    grid-template: '1fr 1fr 1fr 1fr';
+                    grid-gap: 24px;
+                }
+                .answer-box .answer-indicator div {
+                    width: 36px;
+                    height: 36px;
+                    font-size: 16px;
+                    line-height: 24px;
+                    font-weight: 500;
+                }
+
+                .answer-box .answer-submit {
+                    padding: 20px 3px 10px;
+                    border-bottom: 1px solid var(--bg-7);
+                }
+
+                /* .overlay{
+                  clip-path: circle(1% at 89% 8%);
+              } */
+            }
+
+            @media (max-width: 500px) {
+                .start-box .start-body {
+                    display: flex;
+                    justify-content: start;
+                    flex-direction: column;
+                }
+
+                .start-body .start-body-left {
+                    width: 100%;
+                    border-right: none;
+                }
+
+                .start-body .start-body-right {
+                    width: 100%;
+                    padding-left: 0px;
+                    margin: 10px 0;
+                }
+                .review-box {
+                    margin: 10px;
+                    padding: 16px;
+                    height: calc(100vh - 20px);
+                    border-radius: 18px;
+                }
+
+                .review-box .review-body {
+                    height: calc(100vh - 52px);
+                }
+            }
+
+            @media (max-width: 400px) {
+                .quiz-box,
+                .review-box {
+                    margin: 8px;
+                    padding: 16px;
+                    height: calc(100vh - 16px);
+                    border-radius: 12px;
+                }
+
+                .quiz-body .question-box {
+                    height: calc(100vh - 91px);
+                }
+
+                .quiz-body .answer-box {
+                    height: calc(100vh - 16px);
+                    left: calc(100vw - 308px);
+                    margin: 8px 0;
+                    padding: 16px;
+                    border-radius: 12px;
+                }
+
+                .quiz-body .answer-box.active {
+                    left: calc(100vw - 308px);
+                }
+
+                .answer-box .answer-header {
+                    padding: 6px 0 10px;
+                }
+
+                /* .overlay{
+                  clip-path: circle(2% at 90% 7%);
+              } */
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 1. Start Box -->
+        <div class="start-box">
+            <div class="start-body">
+                <div class="start-body-left">
+                    <div class="heading">Instruction</div>
+                    <div class="total-question">Total No of Question :</div>
+                    <div class="number">
+                        <span>Right : +4</span>
+                        <span>Wrong : -1</span>
+                    </div>
+                </div>
+
+                <div class="start-body-right">
+                    <div class="heading">Chapter</div>
+                    <div class="chapter">Biological Classification :</div>
+                    <div class="topics">
+                        <span>Monera</span>
+                        <span>Protista</span>
+                        <span>Fungi</span>
+                        <span>Planti</span>
+                        <span>Animilia</span>
+                        <span>Short Notes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="start-footer">
+                <button type="button" class="btn start">Start Quiz</button>
             </div>
         </div>
 
-        <!-- 2.2 Quiz Body -->
-        <div class="quiz-body">
-            <!-- 2.2.1 Question Box -->
-            <div class="question-box">
-                <!-- 2.2.1.1 Question Number -->
-                <div class="question-header">
-                    <div class="question-number">Q. 00</div>
-                    <div class="quiz-timer">00 : 00</div>
+        <!-- 2. Quiz Box -->
+        <div class="quiz-box">
+            <!-- 2.1 Quiz Header -->
+            <div class="quiz-header">
+                <div class="quiz-title">Leaving World Exercise 1</div>
+                <div class="quiz-menu">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="var(--bg-P)"
+                        viewBox="0 0 448 512"
+                    >
+                        <path
+                            d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+                        />
+                    </svg>
                 </div>
+            </div>
 
-                <!-- 2.2.1.2 Question Text -->
-                <div class="question-text"></div>
+            <!-- 2.2 Quiz Body -->
+            <div class="quiz-body">
+                <!-- 2.2.1 Question Box -->
+                <div class="question-box">
+                    <!-- 2.2.1.1 Question Number -->
+                    <div class="question-header">
+                        <div class="question-number">Q. 00</div>
+                        <div class="quiz-timer">00 : 00</div>
+                    </div>
 
-                <!-- 2.2.1.3 Question Option -->
-                <div class="question-option">
-                    <!-- <div class="option"><div class="option-alpha">A</div> Aristotle</div>
+                    <!-- 2.2.1.2 Question Text -->
+                    <div class="question-text"></div>
+
+                    <!-- 2.2.1.3 Question Option -->
+                    <div class="question-option">
+                        <!-- <div class="option"><div class="option-alpha">A</div> Aristotle</div>
                     <div class="option"><div class="option-alpha">B</div> Darwin</div>
                     <div class="option"><div class="option-alpha">C</div> Lamarck & Treviranus</div>
                     <div class="option"><div class="option-alpha">D</div> Linnaeus</div> -->
+                    </div>
+
+                    <!-- 2.2.1.4 Question Direction -->
+                    <div class="question-direction">
+                        <button type="button" class="btn prev">Prev</button>
+                        <button type="button" class="btn next">Next</button>
+                    </div>
                 </div>
 
-                <!-- 2.2.1.4 Question Direction -->
-                <div class="question-direction">
-                    <button type="button" class="btn prev">Prev</button>
-                    <button type="button" class="btn next">Next</button> 
+                <!-- 2.2.2 ANswer Box -->
+                <div class="answer-box">
+                    <div class="answer-header">
+                        <div class="answer-text">Question List</div>
+                        <div class="answer-close">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="var(--bg-0)"
+                                viewBox="0 0 352 512"
+                            >
+                                <path
+                                    d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="answer-instruction">
+                        <div class="correct-box">
+                            <div></div>
+                            <span>Correct</span>
+                        </div>
+                        <div class="unmarked-box">
+                            <div></div>
+                            <span>Unmarked</span>
+                        </div>
+                        <div class="incorrect-box">
+                            <div></div>
+                            <span>Incorrect</span>
+                        </div>
+                    </div>
+
+                    <div class="answer-container">
+                        <div class="answer-indicator"></div>
+                    </div>
+
+                    <div class="answer-submit">
+                        <button type="button" class="btn submit">Submit</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- 2.2.2 ANswer Box -->
-            <div class="answer-box">
+            <!-- 2.3 Quiz Bottom -->
+            <!-- <div class="quiz-footer"></div> -->
+        </div>
 
-                <div class="answer-header">
-                    <div class="answer-text">
-                        Question List
-                    </div>
-                    <div class="answer-close">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="var(--bg-0)" viewBox="0 0 352 512">
-                            <path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/>
-                        </svg>
-                    </div>
-                </div>
+        <!-- 3. Overlay -->
+        <div class="overlay"></div>
 
-                <div class="answer-instruction">
-                    <div class="correct-box">
-                        <div></div>
-                        <span>Correct</span>
-                    </div>
-                    <div class="unmarked-box">
-                        <div></div>
-                        <span>Unmarked</span>
-                    </div>
-                    <div class="incorrect-box">
-                        <div></div>
-                        <span>Incorrect</span>
-                    </div>
-                </div>
-
-                <div class="answer-container">
-                    <div class="answer-indicator"></div>
-                </div>
-
-                <div class="answer-submit">
-                    <button type="button" class="btn submit">Submit</button>
-                </div>
+        <!-- 4. Result Box -->
+        <div class="result-box">
+            <div class="result-header">
+                <h3>Quiz Result</h3>
             </div>
 
+            <div class="result-body">
+                <table>
+                    <tr>
+                        <td>Total Questions</td>
+                        <td class="total-question">123</td>
+                    </tr>
+
+                    <tr>
+                        <td>Total Attempt</td>
+                        <td class="total-attempt">123</td>
+                    </tr>
+
+                    <tr>
+                        <td>Total Correct</td>
+                        <td class="total-right">123</td>
+                    </tr>
+
+                    <tr>
+                        <td>Total Wrong</td>
+                        <td class="total-wrong">123</td>
+                    </tr>
+
+                    <tr>
+                        <td>Total Time Taken</td>
+                        <td class="total-time">123</td>
+                    </tr>
+
+                    <tr>
+                        <td>Total Percentage</td>
+                        <td class="total-percentage">123</td>
+                    </tr>
+
+                    <tr>
+                        <td>Total Score</td>
+                        <td class="total-score">123</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="result-footer">
+                <button type="button" class="btn again1">Try Again</button>
+                <button type="button" class="btn review">Review</button>
+            </div>
         </div>
 
-        <!-- 2.3 Quiz Bottom -->
-        <!-- <div class="quiz-footer"></div> -->
-    </div>
+        <!-- 5. Quiz Review -->
+        <div class="review-box">
+            <div class="review-body"></div>
 
-    <!-- 3. Overlay -->
-    <div class="overlay"></div>
-
-    <!-- 4. Result Box -->
-    <div class="result-box">
-
-        <div class="result-header"> 
-            <h3>Quiz Result</h3>
+            <div class="review-footer">
+                <button type="button" class="btn again2">Try Again</button>
+                <button type="button" class="btn home">Go To Home</button>
+            </div>
         </div>
 
-        <div class="result-body">
-            <table>
-                <tr>
-                    <td>Total Questions</td>
-                    <td class="total-question">123</td>
-                </tr>
+        <script src="biology geneticks.js"></script>
 
-                <tr>
-                    <td>Total Attempt</td>
-                    <td class="total-attempt">123</td>
-                </tr>
-
-                <tr>
-                    <td>Total Correct</td>
-                    <td class="total-right">123</td>
-                </tr>
-                
-                <tr>
-                    <td>Total Wrong</td>
-                    <td class="total-wrong">123</td>
-                </tr>
-                
-                <tr>
-                    <td>Total Time Taken</td>
-                    <td class="total-time">123</td>
-                </tr>
-
-                <tr>
-                    <td>Total Percentage</td>
-                    <td class="total-percentage">123</td>
-                </tr>
-
-                <tr>
-                    <td>Total Score</td>
-                    <td class="total-score">123</td>
-                </tr>
-            </table>  
-        </div>
-        
-       
-        <div class="result-footer">
-            <button type="button" class="btn again1">Try Again</button>
-            <button type="button" class="btn review">Review</button>
-        </div>
-           
-    </div>
-
-    <!-- 5. Quiz Review -->
-    <div class="review-box">
-
-        <div class="review-body">
-           
-        </div>
-
-        <div class="review-footer">
-            <button type="button" class="btn again2">Try Again</button>
-            <button type="button" class="btn home">Go To Home</button>
-        </div>
-        
-    </div>
-
-
-
-
-
-    <script src="question.js"></script>
-
-    
-    <script>
-        // css part 
-        let menu = document.querySelector('.quiz-menu');
-        let shut = document.querySelector('.answer-close');
-        let side = document.querySelector('.answer-box');
-        let over = document.querySelector('.overlay');
-
-        menu.addEventListener('click', function() {
-            side.classList.add('active');
-            over.classList.add('active');
-        });
-
-        shut.addEventListener('click', function() {
-            side.classList.remove('active');
-            over.classList.remove('active');
-        });
-    
-
-        // javascript part
-
-        // html part select
-        let numb = document.querySelector('.question-number');
-        let time = document.querySelector('.quiz-timer');
-        let text = document.querySelector('.question-text');
-        let opts = document.querySelector('.question-option');
-        let list = document.querySelector('.answer-indicator'); 
-
-        let S_Box = document.querySelector('.start-box');
-        let Q_Box = document.querySelector('.quiz-box');
-        let R_Box = document.querySelector('.result-box');
-        let C_Box = document.querySelector('.review-box');
-
-        // quiz question select
-
-        // let quiz = [];
-
-        let currentQues;
-        let currentOpts;
-
-        let currentAns;
-        let actualAns;
-        let usersAns;
-
-        let counter = 0;
-        let rightAns = 0;
-        let wrongAns = 0;
-
-        // alphabet list array
-        let alpha = ['A','B','C','D'];
-
-        // timer variable
-        let st = new Date(new Date().setTime(0));
-        let nt = st.getTime();
-        let seconds = Math.floor((nt % (100 * 60)) / 1000);
-        let minutes = Math.floor((nt % (1000 * 60 * 60)) / 1000);
-
-
-        // function setQuesArray() {
-        //     for (let i = 0; i < quiz.length; i++) {
-        //         quesArray.push(quiz[i]);
-        //     }
-        // }
-
-
-        function setQuestion() {
-            // set question number
-            numb.innerHTML = `Q. ${counter + 1}`;
-            if(counter < 9){ numb.innerHTML = `Q. 0${counter + 1}` }
-
-
-            // set question text
-            currentQues = quiz[counter];
-            text.innerHTML = currentQues.question;
-
-
-            // set question option
-            currentOpts = currentQues.options;
-            opts.innerHTML = '';
-            for(let i = 0; i < currentOpts.length; i++){
-                let option = document.createElement('div');
-                option.innerHTML = `<div class="option-alpha"> ${alpha[i]} </div> ${currentOpts[i]}`;
-                option.id = i + 1;
-                option.className = 'option';
-                option.setAttribute('onclick', 'getOption(this)');
-                opts.appendChild(option);
-            }
-        }
-
-
-        function getOption(num) {
-            currentAns = parseInt(num.id);
-            actualAns = quiz[counter].answer;
-
-            optsLength = opts.children.length;
-
-            if(currentAns == actualAns) {
-                // right option
-                num.classList.add('right');
-                num.firstElementChild.classList.add('right');
-                list.children[counter].classList.add('right');
-
-                rightAns++;
-
-            }else{
-                // wrong option
-                num.classList.add('wrong');
-                num.firstElementChild.classList.add('wrong');
-                list.children[counter].classList.add('wrong');
-
-                opts.children[actualAns - 1].firstElementChild.classList.add('right');
-                opts.children[actualAns - 1].classList.add('right');
-
-                wrongAns++;
-            }
-
-            // set others option unClickable
-            for(let i = 0; i < optsLength; i++) {
-                opts.children[i].classList.add('answered');
-            }
-
-            // store current ans in quiz array
-            quiz[counter].userAns = '';
-            for (let i = 0; i < quiz.length; i++) {
-                quiz[counter].userAns = currentAns;
-            }
-                  
-        }
-
-
-        function setQuesList() {
-            // set question list
-            list.innerHTML = '';
-            for(let i = 0; i < quiz.length; i++) {
-                let qNum = document.createElement('div');
-                qNum.innerText = i + 1;
-                qNum.setAttribute('onclick', 'getQuesNum(this)');
-                list.appendChild(qNum);
-            }
-        }
-
-
-        function getQuesNum(e) {
+        <script>
             // css part
-            side.classList.remove('active');
-            over.classList.remove('active');
+            let menu = document.querySelector('.quiz-menu');
+            let shut = document.querySelector('.answer-close');
+            let side = document.querySelector('.answer-box');
+            let over = document.querySelector('.overlay');
 
-            setTimeout(function() {
-                // get question number from question list
-                let queNum = parseInt(e.innerText);
-                counter = queNum - 1;
+            menu.addEventListener('click', function () {
+                side.classList.add('active');
+                over.classList.add('active');
+            });
 
-                setQuestion();
+            shut.addEventListener('click', function () {
+                side.classList.remove('active');
+                over.classList.remove('active');
+            });
 
-                preview();
-                
-            }, 400);
-  
-        }
+            // javascript part
+
+            // html part select
+            let numb = document.querySelector('.question-number');
+            let time = document.querySelector('.quiz-timer');
+            let text = document.querySelector('.question-text');
+            let opts = document.querySelector('.question-option');
+            let list = document.querySelector('.answer-indicator');
+
+            let S_Box = document.querySelector('.start-box');
+            let Q_Box = document.querySelector('.quiz-box');
+            let R_Box = document.querySelector('.result-box');
+            let C_Box = document.querySelector('.review-box');
+
+            // quiz question select
+
+            // let quiz = [];
+
+            let currentQues;
+            let currentOpts;
+
+            let currentAns;
+            let actualAns;
+            let usersAns;
+
+            let counter = 0;
+            let rightAns = 0;
+            let wrongAns = 0;
+
+            // alphabet list array
+            let alpha = ['A', 'B', 'C', 'D'];
+
+            // timer variable
+            let st = new Date(new Date().setTime(0));
+            let nt = st.getTime();
+            let seconds = Math.floor((nt % (100 * 60)) / 1000);
+            let minutes = Math.floor((nt % (1000 * 60 * 60)) / 1000);
+            let timer; 
 
 
-        function preview() {
-            userAns = quiz[counter].userAns;
-            actualAns = quiz[counter].answer;
+            function setQuestion() {
+                // set question number
+                numb.innerHTML = `Q. ${counter + 1}`;
+                if (counter < 9) {
+                    numb.innerHTML = `Q. 0${counter + 1}`;
+                }
 
-            optsLength = opts.children.length;
+                // set question text
+                currentQues = quiz[counter];
+                text.innerHTML = currentQues.question;
 
-            if(userAns == undefined) {
+                // set question option
+                currentOpts = currentQues.options;
+                opts.innerHTML = '';
+                for (let i = 0; i < currentOpts.length; i++) {
+                    let option = document.createElement('div');
+                    option.innerHTML = `
+                        <div class="option-alpha"> ${alpha[i]} </div> 
+                        <div class="option-text"> ${currentOpts[i]} <div> `;
+                    option.id = i + 1;
+                    option.className = 'option';
+                    option.setAttribute('onclick', 'getOption(this)');
+                    opts.appendChild(option);
+                }
+            }
 
-                setQuestion();
 
-            } else {
+            function getOption(num) {
+                currentAns = parseInt(num.id);
+                actualAns = quiz[counter].answer;
 
-                if(userAns === actualAns) {
+                optsLength = opts.children.length;
 
-                    opts.children[actualAns - 1].firstElementChild.classList.add('right');
-                    opts.children[actualAns - 1].classList.add('right');
-                    
+                if (currentAns == actualAns) {
+                    // right option
+                    num.classList.add('right');
+                    num.firstElementChild.classList.add('right');
+                    list.children[counter].classList.add('right');
+
+                    rightAns++;
                 } else {
+                    // wrong option
+                    num.classList.add('wrong');
+                    num.firstElementChild.classList.add('wrong');
+                    list.children[counter].classList.add('wrong');
 
-                    opts.children[actualAns - 1].firstElementChild.classList.add('right');
+                    opts.children[
+                        actualAns - 1
+                    ].firstElementChild.classList.add('right');
                     opts.children[actualAns - 1].classList.add('right');
 
-                    opts.children[userAns - 1].firstElementChild.classList.add('wrong');
-                    opts.children[userAns - 1].classList.add('wrong');
-
+                    wrongAns++;
                 }
 
                 // set others option unClickable
-                for(let i = 0; i < optsLength; i++) {
+                for (let i = 0; i < optsLength; i++) {
                     opts.children[i].classList.add('answered');
                 }
 
+                // store current ans in quiz array
+                quiz[counter].userAns = '';
+                for (let i = 0; i < quiz.length; i++) {
+                    quiz[counter].userAns = currentAns;
+                }
             }
 
-        }
 
-        let timer = setInterval(setTimer, 1000);
-
-        function  setTimer() {
-            if (seconds < 59) {
-                seconds++;
-            } else {
-                minutes++;
-                seconds = 0;
+            function setQuesList() {
+                // set question list
+                list.innerHTML = '';
+                for (let i = 0; i < quiz.length; i++) {
+                    let qNum = document.createElement('div');
+                    qNum.innerText = i + 1;
+                    qNum.setAttribute('onclick', 'getQuesNum(this)');
+                    list.appendChild(qNum);
+                }
             }
 
-            let sec = seconds < 10 ? `0${seconds}` : `${seconds}`;
-            let min = minutes < 10 ? `0${minutes}` : `${minutes}`;
-                
-            time.innerHTML = `${min} : ${sec}`;
 
-        }
+            function getQuesNum(e) {
+                // css part
+                side.classList.remove('active');
+                over.classList.remove('active');
 
-        // prev question
-        let prev = document.querySelector('.prev');
-        prev.addEventListener('click', function() {
-            if(counter === 0) {
-                prev.disable = 'true'; 
-            }else {
-                counter--;
+                setTimeout(function () {
+                    // get question number from question list
+                    let queNum = parseInt(e.innerText);
+                    counter = queNum - 1;
+
+                    setQuestion();
+
+                    preview();
+                }, 400);
+            }
+
+
+            function preview() {
+                userAns = quiz[counter].userAns;
+                actualAns = quiz[counter].answer;
+
+                optsLength = opts.children.length;
+
+                if (userAns == undefined) {
+                    setQuestion();
+                } else {
+                    if (userAns === actualAns) {
+                        opts.children[
+                            actualAns - 1
+                        ].firstElementChild.classList.add('right');
+                        opts.children[actualAns - 1].classList.add('right');
+                    } else {
+                        opts.children[
+                            actualAns - 1
+                        ].firstElementChild.classList.add('right');
+                        opts.children[actualAns - 1].classList.add('right');
+
+                        opts.children[
+                            userAns - 1
+                        ].firstElementChild.classList.add('wrong');
+                        opts.children[userAns - 1].classList.add('wrong');
+                    }
+
+                    // set others option unClickable
+                    for (let i = 0; i < optsLength; i++) {
+                        opts.children[i].classList.add('answered');
+                    }
+                }
+            }
+
+
+            function setTimer() {
+                if (seconds < 59) {
+                    seconds++;
+                } else {
+                    minutes++;
+                    seconds = 0;
+                }
+
+                let sec = seconds < 10 ? `0${seconds}` : `${seconds}`;
+                let min = minutes < 10 ? `0${minutes}` : `${minutes}`;
+
+                time.innerHTML = `${min} : ${sec}`;
+            }
+
+            
+            // prev question
+            let prev = document.querySelector('.prev');
+            prev.addEventListener('click', function () {
+                if (counter === 0) {
+                    prev.disable = 'true';
+                } else {
+                    counter--;
+                    setQuestion();
+                }
+                preview();
+            });
+
+
+            // next question
+            let next = document.querySelector('.next');
+            next.addEventListener('click', function () {
+                if (counter === quiz.length - 1) {
+                    prev.disable = 'true';
+                } else {
+                    counter++;
+                    setQuestion();
+                }
+                preview();
+            });
+
+
+            // submit quiz
+            let submit = document.querySelector('.submit');
+            submit.addEventListener('click', function () {
+                quizResult();
+
+                clearInterval(timer);
+
+                side.classList.remove('active');
+                over.classList.remove('active');
+
+                Q_Box.classList.remove('active');
+                R_Box.classList.add('active');
+
+                // setTimer();
+                // setTimeout(function() {
+                //     Q_Box.classList.remove('anim');
+                // }, 700);
+
+                // setTimeout(function() {
+                //     Q_Box.classList.add('inactive');
+                // }, 800);
+
+                // setTimeout(function() {
+                //     Q_Box.classList.remove('inactive');
+                //     Q_Box.classList.remove('active');
+                // }, 1400);
+
+                // setTimeout(function() {
+                //     R_Box.classList.add('active');
+                //     // aBody.classList.add('active');
+                // }, 1500);
+
+                // setTimeout(function() {
+                //     R_Box.classList.add('anim');
+                // }, 1600);
+            });
+
+
+            // quiz result
+            function quizResult() {
+                R_Box.querySelector('.total-question').innerHTML = quiz.length;
+                R_Box.querySelector('.total-attempt').innerHTML =
+                    rightAns + wrongAns;
+                R_Box.querySelector('.total-right').innerHTML = rightAns;
+                R_Box.querySelector('.total-wrong').innerHTML = wrongAns;
+
+                let score = rightAns * 4 - wrongAns + ' / ' + quiz.length * 4;
+
+                R_Box.querySelector('.total-percentage').innerHTML =
+                    ((rightAns / quiz.length) * 100).toFixed(2) + '%';
+                R_Box.querySelector('.total-score').innerHTML = score;
+
+                let timeTaken = `${minutes} min & ${seconds} sec`;
+                if (minutes < 1) {
+                    timeTaken = `${seconds} sec`;
+                }
+                R_Box.querySelector('.total-time').innerHTML = timeTaken;
+            }
+
+
+            // start quiz
+            let start = document.querySelector('.start');
+            start.addEventListener('click', function () {
+
                 setQuestion();
-            }
-            preview();
-        });
-        
+                setQuesList();
+                setTimer();
 
-        // next question
-        let next = document.querySelector('.next');
-        next.addEventListener('click', function() {
-            if(counter === quiz.length - 1) {
-                prev.disable = 'true'; 
-            }else {
-                counter++;
-                setQuestion();
-            }
-            preview();
-        });
+                timer = setInterval(setTimer, 1000);
 
+                S_Box.classList.add('inactive');
+                Q_Box.classList.add('active');
 
+                //     // setTimer();
+                //     setTimeout(function() {
+                //         S_Box.classList.add('anim');
+                //     }, 100);
 
-        // start quiz 
-        // let q_srt = document.querySelector('.start');
-        //  q_srt.addEventListener('click', function(){ 
+                //     setTimeout(function() {
+                //         S_Box.classList.add('inactive');
+                //     }, 900);
 
-        //     setQuestion();
-             
-        //     setQuesList();
-             
-        //     // setTimer();
-        //     setTimeout(function() {
-        //         S_Box.classList.add('anim');
-        //     }, 100);  
- 
-        //     setTimeout(function() {
-        //         S_Box.classList.add('inactive');
-        //     }, 900);
+                //     setTimeout(function() {
+                //         Q_Box.classList.add('active');
+                //         S_Box.classList.remove('anim');
+                //         aBody.classList.remove('active');
+                //     }, 1000);
 
-        //     setTimeout(function() {
-        //         Q_Box.classList.add('active');
-        //         S_Box.classList.remove('anim');
-        //         aBody.classList.remove('active');
-        //     }, 1000);
+                //     setTimeout(function() {
+                //         Q_Box.classList.add('anim');
+                //     }, 1100);
+            });
 
-        //     setTimeout(function() {
-        //         Q_Box.classList.add('anim');
-        //     }, 1100);
-             
-                 
-        // }); 
+            let review = document.querySelector('.review');
+            review.addEventListener('click', function () {
+                getReview();
 
+                R_Box.classList.remove('active');
+                C_Box.classList.add('active');
+            });
 
+            function getReview() {
+                let cards = document.querySelector('.review-body');
+                cards.innerHTML = '';
+                for (let i = 0; i < quiz.length; i++) {
+                    let Qus = quiz[i].question;
+                    let Opt = quiz[i].options;
 
-        // submit quiz 
-        let submit = document.querySelector('.submit');
-        submit.addEventListener('click', function(){ 
+                    let rAns = quiz[i].answer;
+                    let uAns = quiz[i].userAns;
 
-            quizResult();
+                    let card = document.createElement('div');
 
-            clearInterval(timer);
-
-            side.classList.remove('active');
-            over.classList.remove('active');
-
-            Q_Box.classList.add('inactive');
-            R_Box.classList.add('active');
-
-            // setTimer();
-            // setTimeout(function() {
-            //     Q_Box.classList.remove('anim');
-            // }, 700);  
- 
-            // setTimeout(function() {
-            //     Q_Box.classList.add('inactive');
-            // }, 800);
-
-            // setTimeout(function() {
-            //     Q_Box.classList.remove('inactive');
-            //     Q_Box.classList.remove('active');
-            // }, 1400);
-
-            // setTimeout(function() {
-            //     R_Box.classList.add('active');
-            //     // aBody.classList.add('active');
-            // }, 1500);
-
-            // setTimeout(function() {
-            //     R_Box.classList.add('anim');
-            // }, 1600);
-                 
-        }); 
-
-
-        // quiz result
-        function quizResult() {
-            R_Box.querySelector('.total-question').innerHTML = quiz.length;
-            R_Box.querySelector('.total-attempt').innerHTML = (rightAns + wrongAns);
-            R_Box.querySelector('.total-right').innerHTML = rightAns ;
-            R_Box.querySelector('.total-wrong').innerHTML = wrongAns;
-
-            let score = ((rightAns * 4) - wrongAns) + ' / ' + (quiz.length * 4);
-
-            R_Box.querySelector('.total-percentage').innerHTML = ((rightAns / quiz.length) * 100).toFixed(2) + '%';
-            R_Box.querySelector('.total-score').innerHTML = score;
-
-            let timeTaken = `${minutes} min & ${seconds} sec`;
-            if(minutes < 1){
-                timeTaken = `${seconds} sec`;
-            }
-            R_Box.querySelector('.total-time').innerHTML = timeTaken ;
-        }
-
-
-        let review = document.querySelector('.review');
-        review.addEventListener('click', function(){ 
-
-            getReview();
-
-            R_Box.classList.remove('active');
-            C_Box.classList.add('active');
-
-                 
-        }); 
-
-
-        function getReview() {
-            let cards = document.querySelector('.review-body');
-            cards.innerHTML = '';
-            for (let i = 0; i < quiz.length; i++) {
-
-                let Qus = quiz[i].question;
-                let Opt = quiz[i].options;
-
-                let rAns = quiz[i].answer;
-                let uAns = quiz[i].userAns;
-
-                let card = document.createElement('div');
-
-                if(uAns === rAns){
-                    card.innerHTML = `
+                    if (uAns === rAns) {
+                        card.innerHTML = `
                         <div class="review-ques">
                             <b>Q${i + 1}.</b> &nbsp; ${Qus}
                         </div>
@@ -1544,10 +1695,12 @@
                             </div>
                         </div>
                     `;
-                }else if(uAns == undefined){
-                    card.innerHTML = `
+                    } else if (uAns == undefined) {
+                        card.innerHTML = `
                         <div class="review-ques">
-                            <b>Q${i + 1}.</b> &nbsp; ${Qus} <span>Unmarked</span>
+                            <b>Q${
+                                i + 1
+                            }.</b> &nbsp; ${Qus} <span>Unmarked</span>
                         </div>
 
                         <div class="review-ans">
@@ -1556,8 +1709,8 @@
                             </div>
                         </div>
                     `;
-                }else{
-                    card.innerHTML = `
+                    } else {
+                        card.innerHTML = `
                         <div class="review-ques">
                             <b>Q${i + 1}.</b> &nbsp; ${Qus}
                         </div>
@@ -1572,54 +1725,49 @@
                             </div>
                         </div>
                     `;
+                    }
+
+                    card.className = 'question-card';
+                    cards.appendChild(card);
+                }
+            }
+
+            let again1 = document.querySelector('.again1');
+            again1.addEventListener('click', setAgain);
+
+            let again2 = document.querySelector('.again2');
+            again2.addEventListener('click', setAgain);
+
+            function setAgain() {
+                C_Box.classList.remove('active');
+                R_Box.classList.remove('active');
+                Q_Box.classList.add('active');
+
+                counter = 0;
+                rightAns = 0;
+                wrongAns = 0;
+
+                for (let i = 0; i < quiz.length; i++) {
+                    delete quiz[i].userAns;
                 }
 
-                card.className = 'question-card';
-                cards.appendChild(card);
+                st = new Date(new Date().setTime(0));
+                nt = st.getTime();
+                seconds = Math.floor((nt % (100 * 60)) / 1000);
+                minutes = Math.floor((nt % (1000 * 60 * 60)) / 1000);
+
+                timer = setInterval(setTimer, 1000);
+
+                setQuestion();
+                setQuesList();
+                setTimer();
             }
 
-        }
+            let home = document.querySelector('.home');
+            home.addEventListener('click', function() {
+                
+            })
 
-        let again1 = document.querySelector('.again1');
-        again1.addEventListener('click', setAgain);
-
-        let again2 = document.querySelector('.again2');
-        again2.addEventListener('click', setAgain);
-
-        function setAgain() {
-            C_Box.classList.remove('active');
-            Q_Box.classList.remove('inactive');
-            R_Box.classList.remove('active');
-            
-            counter = 0;
-            rightAns = 0;
-            wrongAns = 0;
-            
-        
-            for (let i = 0; i < quiz.length; i++) {
-                delete quiz[i].userAns;
-            }
-
-            st = new Date(new Date().setTime(0));
-            nt = st.getTime();
-            seconds = Math.floor((nt % (100 * 60)) / 1000);
-            minutes = Math.floor((nt % (1000 * 60 * 60)) / 1000);
-
-            timer = setInterval(setTimer, 1000);
-
-            startQuiz();
-        }
-        
-        function startQuiz() {
-            setQuestion();
-            setQuesList();
-            setTimer();
-        }
-
-        startQuiz();
-        
-        
-    </script>
-
-</body>
+        </script>
+    </body>
 </html>
