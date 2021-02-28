@@ -1,4 +1,4 @@
-            /* @import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600&display=swap'); */
+            @import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600&display=swap');
 
             /* variable */
             :root {
@@ -49,13 +49,13 @@
                 --bg-l99: #99997f;
                 --bg-l: #edf5ff; /* violet */
             }
-            @font-face {
+            /* @font-face {
                 font-family: 'Karla';
                 font-style: normal;
                 font-weight: 500;
-                /* src: url('karla-Regular-New.woff') format('woff'); */
                 src: url('karla-Regular-New.woff') format('woff');
-            }
+                src: url('karla-Regular-New.woff') format('woff');
+            } */
             * {
                 margin: 0;
                 padding: 0;
