@@ -17,7 +17,7 @@ let quiz = [
             'Amniocentesis has been banned  ',
             'All of these ',
         ],
-        answer: 4,
+        answer: 3,
     },
     {
         question:
@@ -28,7 +28,7 @@ let quiz = [
             'Death rate  ',
             'Maternal mortality rate ',
         ],
-        answer: 4,
+        answer: 2,
     },
     {
         question: 'The copper ions of IUDs?',
@@ -38,7 +38,7 @@ let quiz = [
             'Increase phagocytosis of sperms  ',
             'Make cervix hostile to sperms ',
         ],
-        answer: 4,
+        answer: 1,
     },
     {
         question: 'Progestasert and LNG-20 are?',
@@ -76,12 +76,12 @@ let quiz = [
             'C and D  ',
             'A and C ',
         ],
-        answer: 4,
+        answer: 1,
     },
     {
         question: 'The family planning programme in India were initiated in?',
         options: ['1951  ', '1961 ', '1971  ', '1981 '],
-        answer: 4,
+        answer: 1,
     },
     {
         question: 'The diaphragm, cervical cap and vaults are?',
@@ -91,7 +91,7 @@ let quiz = [
             'IUDs  ',
             'Implants ',
         ],
-        answer: 4,
+        answer: 2,
     },
     {
         question:
@@ -102,13 +102,13 @@ let quiz = [
             'IUD  ',
             'Oral contraceptive ',
         ],
-        answer: 4,
+        answer: 3,
     },
     {
         question:
             'The transfer of zygote or early embryo (up to 8 blastomere) into fallopian tube is?',
         options: ['IUF and ET  ', 'ZIFT ', 'GIFT  ', 'IUT '],
-        answer: 4,
+        answer: 2,
     },
     {
         question: 'Which of the following statements is wrong?',
@@ -118,7 +118,7 @@ let quiz = [
             "Test tube grows within surrogate mother's womb.  ",
             'Test tube baby grows inside test tube in initial embryogenesis ',
         ],
-        answer: 4,
+        answer: 1,
     },
     {
         question: 'What is the figure given below showing in particular?',
@@ -128,7 +128,7 @@ let quiz = [
             'Tubectomy  ',
             'Vasectomy ',
         ],
-        answer: 4,
+        answer: 3,
     },
     {
         question:
@@ -150,7 +150,7 @@ let quiz = [
             'Jaundice  ',
             'Klinefelter syndrome ',
         ],
-        answer: 4,
+        answer: 3,
     },
     {
         question: 'Artificial insemination means?',
@@ -160,7 +160,7 @@ let quiz = [
             'Introduction of sperms of healthy donor directly into the ovary ',
             'Transfer of sperms of healthy donor to a test tube containing ova ',
         ],
-        answer: 4,
+        answer: 2,
     },
     {
         question:
@@ -171,7 +171,7 @@ let quiz = [
             'Cervical cap  ',
             'Vault ',
         ],
-        answer: 4,
+        answer: 2,
     },
     {
         question: 'Assisted reproductive technology, IVF involves transfer of?',
@@ -181,7 +181,7 @@ let quiz = [
             'Zygote into the uterus.  ',
             'Embryo with 16 blastomeres into the fallopian tube. ',
         ],
-        answer: 4,
+        answer: 2,
     },
     {
         question: 'A contraceptive pill prevents ovulation by?',
@@ -191,9 +191,9 @@ let quiz = [
             'Stimulating release of FSH and LH  ',
             'Causing immediate degeneration of released ovum ',
         ],
-        answer: 4,
+        answer: 2,
     },
-    {
+    { 
         question:
             'Progestasert is an IUD which makes the uterus unsuitable and cervix hostile to the sperms as they are?',
         options: [
@@ -202,7 +202,7 @@ let quiz = [
             'Ideal contraceptive  ',
             'Non-medicated IUDs ',
         ],
-        answer: 4,
+        answer: 1,
     },
     {
         question: 'Assisted Reproductive Technology does not include?',
@@ -212,7 +212,7 @@ let quiz = [
             'Artificial insemination  ',
             'Gamete Intra Fallopian Transfer ',
         ],
-        answer: 4,
+        answer: 1,
     },
     {
         question: 'How many of the following statement is/ are correct? ',
@@ -223,7 +223,7 @@ let quiz = [
             'IV. 45-50 billion MTP are performed in world in an year. ',
         ],
         options: ['One  ', 'Two ', 'Three  ', 'Four '],
-        answer: 4,
+        answer: 1,
     },
     {
         question:
@@ -234,7 +234,7 @@ let quiz = [
             'It can be used for detection of Down syndrome  ',
             'It can be used for detection of chromosomal anomalies ',
         ],
-        answer: 4,
+        answer: 2,
     },
     {
         question: 'Which of the following is hormone releasing IUD?',
@@ -244,7 +244,7 @@ let quiz = [
             'LNG-20  ',
             'Multiload 375 ',
         ],
-        answer: 4,
+        answer: 3,
     },
     {
         question: 'Which of the following is incorrect regarding vasectomy?',
@@ -265,13 +265,13 @@ let quiz = [
             'Uterus  ',
             'Fallopian tube ',
         ],
-        answer: 4,
+        answer: 3,
     },
     {
         question:
             'Transfer of an ovum of a donor into the fallopian tube of a surrogate mother is?',
         options: ['ET  ', 'IUT ', 'GIFT  ', 'ZIFT '],
-        answer: 4,
+        answer: 3,
     },
     {
         question: "The function of copper ions in copper releasing IUD's is?",
@@ -292,7 +292,7 @@ let quiz = [
             'Intracytoplasmic sperm injection  ',
             'Intrauterine transfer ',
         ],
-        answer: 4,
+        answer: 2,
     },
     {
         question:
@@ -303,6 +303,6 @@ let quiz = [
             'Fusion of sperm and ovum is done outside the body of female ',
             'The zygote or early embryo upto eight blastomeres is transferred into the fallopian tube ',
         ],
-        answer: 4,
+        answer: 2,
     }
 ];
