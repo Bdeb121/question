@@ -1,5 +1,4 @@
             @import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600&display=swap');
-
             /* variable */
             :root {
                 --bg-P: #0984e3;
@@ -35,7 +34,8 @@
                 --bg-l1: #d2e9fe;
                 --bg-l11: #d7ecff;
                 --bg-l2: #1f8ffb;
-          
+                /* --bg-l22: #a0c7eb; */
+                /* --bg-l22: #0077ff; #f7f0f4 */
                 --bg-l3: #fff2f2; /* red light*/
                 --bg-l33: #dbedff; /* #e8f4ff #dfefff*/
                 --bg-l4: #ebfeef; /* green light*/
@@ -49,13 +49,14 @@
                 --bg-l99: #99997f;
                 --bg-l: #edf5ff; /* violet */
             }
-            /* @font-face {
+            @font-face {
                 font-family: 'Karla';
                 font-style: normal;
                 font-weight: 500;
+                /* src: url('karla-Regular-New.woff') format('woff'); */
                 src: url('karla-Regular-New.woff') format('woff');
-                src: url('karla-Regular-New.woff') format('woff');
-            } */
+            }
+            /* All selector */
             * {
                 margin: 0;
                 padding: 0;
@@ -70,7 +71,6 @@
                 font-style: normal;
                 font-size: 16px;
                 font-weight: 500;
-            /*  line-height: 24px; */
             }
 
 
@@ -84,7 +84,7 @@
                 font-family: 'Karla', sans-serif;
                 font-size: 18px;
                 font-weight: 500;
-               
+                /* cursor: pointer; */
             }
 
             .btn:hover {
@@ -101,7 +101,7 @@
                 justify-content: start;
                 flex-direction: column;
                 transition: all 0.8s ease-in-out;
-                
+                /* display: none; */
             }
 
             .start-box.inactive {
@@ -159,7 +159,13 @@
             }
 
             .start-body-right .topics {
-                
+                /* display: inline-block; */
+                /* display: grid;
+                grid-auto-flow: dense;
+                grid-template:  "1fr 1fr 1fr" 20px
+                                "1fr 1fr 1fr" 20px;
+                grid-gap: 10px; 
+                place-items: center; */
                 display: flex;
                 /* justify-content: start; */
                 flex-wrap: wrap;
@@ -364,9 +370,8 @@
             .question-table table tr, td, th {
                 border: 1px solid #333;
                 padding: 10px;
-            }
-
-            
+                vertical-align: text-top;
+            }            
             
             .question-table table tr > td:nth-child(2n + 1) {
                 width: 40px;
@@ -412,7 +417,7 @@
                 vertical-align: middle;
                 /* text-align: left; */
                 /* line-height: 18; */
-                text-transform: capitalize;
+                text-transform: auto;
                 transition: all .2s ease-in-out;
                 animation: anim .3s ease-in-out forwards;
                 opacity: .1;
@@ -1029,14 +1034,14 @@
                     height: 100vh;
                     width: 100vw;
                     background: rgba(0, 0, 0, 0.3);
-                    /* transition: all .6s ease-in-out; */
-                    /* clip-path: circle(0% at 93% 8%); */
-                    display: none;
+                    transition: all .64s ease-in-out;
+                    clip-path: circle(0% at 93% 8%);
+                    /* display: none; */
                 }
 
                 .overlay.active {
-                    /* clip-path: circle(100%); */
-                    display: block;
+                    clip-path: circle(100%);
+                    /* display: block; */
                 }
 
             }
@@ -1271,6 +1276,17 @@
                     padding-left: 0px;
                     margin: 10px 0;
                 }
+
+                .question-table table tr, td, th {
+                    padding: 6px;
+                    font-size: 14px;
+                }
+                
+                .question-table table tr > td:nth-child(2n + 1) {
+                    width: 24px;
+                    height: 24px;
+                }
+
                 .review-box {
                     margin: 10px;
                     padding: 16px;
@@ -1290,7 +1306,7 @@
                 }
 
                 .quiz-body .question-box {
-                    height: calc(100vh - 91px);
+                    height: calc(100vh - 90px);
                 }
 
                 .quiz-body .answer-box {
@@ -1313,7 +1329,11 @@
                 .quiz-box,
                 .review-box,
                 .result-box{
-                    margin: 10px;
-                    padding: 20px;
+                    margin: 8px;
+                    padding: 16px;
+                }
+
+                .overlay{
+                  clip-path: circle(0% at 90% 7%);
                 }
             }
