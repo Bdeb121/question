@@ -64,8 +64,8 @@
             let wrongAns = 0;
 
             // alphabet list array
-            let numL = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-            let numR = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii'];
+            let numL = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
+            let numR = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
             let alpha = ['A', 'B', 'C', 'D'];
 
             let R;
