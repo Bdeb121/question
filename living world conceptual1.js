@@ -22,7 +22,7 @@ let quiz = [
         answer: 2,
     },
     {
-        question: 'iological organisation starts with',
+        question: 'Biological organisation starts with',
         options: [
             'cellular level',
             'organism level',
@@ -54,7 +54,7 @@ let quiz = [
         answer: 1,
     },
     {
-        question: 'ark the correct statement',
+        question: 'Mark the correct statement',
         options: [
             'Only living organisms grow.',
             'Plants grow only up to a certain age.',
@@ -99,10 +99,10 @@ let quiz = [
     {
         question: 'Organisation levels in living beings are -',
         options: [
-            'Subcellular – cellular – individual – community – population',
-            'Atomic – molecular – subcellular – cellular – tissue – organ – individual',
-            'Individual – population – organ system – tissue – cellular – molecular – atomic',
-            'Atomic – molecular – tissue – individual – ecosystem – community.',
+            'Subcellular cellular individual community population',
+            'Atomic molecular subcellular cellular tissue organ individual',
+            'Individual population organ system tissue cellular molecular atomic',
+            'Atomic molecular tissue individual ecosystem community.',
         ],
         answer: 2,
     },
@@ -128,7 +128,7 @@ let quiz = [
     },
     {
         question:
-            'Artificial system of classification classifies plants on the basis of –',
+            'Artificial system of classification classifies plants on the basis of',
         options: [
             'One or two characters',
             'Phylogenetic trends',
@@ -139,17 +139,17 @@ let quiz = [
     },
     {
         question:
-            'Group of organisms that closely resemble each other and freely interbreed in nature, constitute a–',
+            'Group of organisms that closely resemble each other and freely interbreed in nature, constitute ',
         options: ['Species ', 'Genus', 'Family ', 'Taxon'],
         answer: 1,
     },
     {
-        question: 'ICBN was first revised in –',
+        question: 'ICBN was first revised in',
         options: ['1961 ', '1964', '1975 ', '1753'],
         answer: 3,
     },
     {
-        question: 'The term taxon refers to –',
+        question: 'The term taxon refers to',
         options: [
             'Name of a species',
             'Name of genus',
@@ -160,7 +160,7 @@ let quiz = [
     },
     {
         question:
-            'The herbarium specimen on whose basis a new species is described for the first time is called as –',
+            'The herbarium specimen on whose basis a new species is described for the first time is called as',
         options: [
             'Syntype ',
             'Holotype',
@@ -171,7 +171,7 @@ let quiz = [
     },
     {
         question:
-            'The scientific naming of plants began with publication of Linnaeus book –',
+            'The scientific naming of plants began with publication of Linnaeus book',
         options: [
             'Genera plantarum ',
             'Systema naturae',
@@ -181,7 +181,7 @@ let quiz = [
         answer: 3,
     },
     {
-        question: 'The basic unit of classification is –',
+        question: 'The basic unit of classification is',
         options: [
             'Genus ',
             'Species',
@@ -192,7 +192,7 @@ let quiz = [
     },
     {
         question:
-            'Individuals of same species having non-genetic differences due to environment are called –',
+            'Individuals of same species having non-genetic differences due to environment are called',
         options: [
             'Biotypes ',
             'Ecotype',
@@ -203,7 +203,7 @@ let quiz = [
     },
     {
         question:
-            'Morphologically similar but reproductively isolated species are called –',
+            'Morphologically similar but reproductively isolated species are called',
         options: [
             'Neontological species ',
             'Sibling species',
@@ -223,7 +223,7 @@ let quiz = [
         answer: 2,
     },
     {
-        question: 'Taxonomy refers to –',
+        question: 'Taxonomy refers to',
         options: [
             'Plant classification ',
             'Plant nomenclature',
@@ -243,7 +243,7 @@ let quiz = [
         answer: 3,
     },
     {
-        question: 'Systematics deals with –',
+        question: 'Systematics deals with',
         options: [
             'Classification ',
             'Nomenclature',
@@ -253,7 +253,7 @@ let quiz = [
         answer: 3,
     },
     {
-        question: 'Phylogeny refers to –',
+        question: 'Phylogeny refers to',
         options: [
             'Natural classification',
             'Evolutionary classification',
@@ -263,7 +263,7 @@ let quiz = [
         answer: 3,
     },
     {
-        question: 'Static concept of species is given by –',
+        question: 'Static concept of species is given by',
         options: ['Linnaeus ', 'Bentham', 'Koch ', 'Mayr'],
         answer: 1,
     },
@@ -289,7 +289,7 @@ let quiz = [
     },
     {
         question:
-            'Species living in different geographical areas are called –',
+            'Species living in different geographical areas are called',
         options: [
             'Allochronic ',
             'Allopatric',
@@ -297,5 +297,5 @@ let quiz = [
             'Siblings',
         ],
         answer: 2,
-    }
+    },
 ];
